@@ -128,6 +128,10 @@ post '/create_payment_intent' do
       :currency => params[:currency] || 'usd',
       :description => params[:description] || 'Example PaymentIntent',
       :payment_method_options => params[:payment_method_options] || [],
+      :metadata => {
+        suite_number: params.fetch(:suite_number, 1234), 
+        license_plate: params.fetch(:license_plate, "ABC-1234")
+      }
     )
   rescue Stripe::StripeError => e
     status 402
